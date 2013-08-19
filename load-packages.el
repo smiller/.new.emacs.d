@@ -48,10 +48,10 @@
 
 (defvar prelude-packages
   '(ace-jump-mode ag dash diminish elisp-slime-nav
-    expand-region flx-ido flycheck gist
+    enotify expand-region feature-mode flx-ido flycheck gist
     git-commit-mode gitconfig-mode gitignore-mode grizzl
     guru-mode helm helm-projectile ido-ubiquitous
-    key-chord magit rainbow-mode
+    key-chord magit rainbow-mode rspec-mode rvm
     smartparens smex typopunct undo-tree
     volatile-highlights zenburn-theme)
   "A list of packages to ensure are installed at launch.")

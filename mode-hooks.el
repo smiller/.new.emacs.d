@@ -11,5 +11,7 @@
   (typopunct-mode -1))
 
 (add-hook 'ruby-mode-hook 'my-code-mode-hook)
+(add-hook 'ruby-mode-hook
+  (lambda () (rvm-activate-corresponding-ruby)))
 (add-hook 'js-mode-hook 'my-code-mode-hook)
 (add-hook 'emacs-lisp-mode-hook 'my-code-mode-hook)
