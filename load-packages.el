@@ -48,7 +48,7 @@
 
 (defvar prelude-packages
   '(ace-jump-mode ag dash diminish elisp-slime-nav
-    enotify expand-region feature-mode flx-ido flycheck gist
+    enotify eproject expand-region feature-mode flx-ido flycheck gist
     git-commit-mode gitconfig-mode gitignore-mode grizzl
     guru-mode helm helm-projectile ido-ubiquitous
     key-chord magit rainbow-mode rspec-mode rvm
