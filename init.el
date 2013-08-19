@@ -1,0 +1,5 @@
+(load "~/.emacs.d/load-packages")
+(load "~/.emacs.d/defaults")
+(load "~/.emacs.d/mode-hooks")
+(load "~/.emacs.d/themes")
+(load "~/.emacs.d/typopunct-mods")
