@@ -51,7 +51,7 @@
     enotify eproject expand-region feature-mode flx-ido flycheck gist
     git-commit-mode gitconfig-mode gitignore-mode grizzl
     guru-mode helm helm-projectile ido-ubiquitous
-    key-chord magit rainbow-mode rspec-mode rvm
+    key-chord magit projectile rainbow-mode rinari rspec-mode rvm
     smartparens smex typopunct undo-tree
     volatile-highlights zenburn-theme)
   "A list of packages to ensure are installed at launch.")
