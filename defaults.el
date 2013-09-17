@@ -16,6 +16,4 @@
 (windmove-default-keybindings)
 (setq windmove-wrap-around t)
 
-(global-hl-line-mode 1)
-
 (projectile-global-mode)

@@ -10,4 +10,5 @@
 (load "~/.emacs.d/mods-enotify")
 (load "~/.emacs.d/mods-pbcopy")
 (load "~/.emacs.d/mods-rspec")
+(load "~/.emacs.d/mods-ruby-tools")
 (load "~/.emacs.d/mods-typopunct")

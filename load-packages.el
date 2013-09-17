@@ -59,6 +59,7 @@
     enotify
     rinari
     robe
+    ruby-tools
 
     ;; from prelude
     ace-jump-mode
