@@ -57,6 +57,7 @@
 
     ;; from smiller: trying out
     enotify
+    markdown-mode
     rinari
     robe
     ruby-tools
