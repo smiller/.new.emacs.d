@@ -7,6 +7,7 @@
 (load "~/.emacs.d/key-bindings")
 (load "~/.emacs.d/verse-line")
 
+(load "~/.emacs.d/mods-dired")
 (load "~/.emacs.d/mods-enotify")
 (load "~/.emacs.d/mods-pbcopy")
 (load "~/.emacs.d/mods-rspec")
