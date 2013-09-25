@@ -17,3 +17,6 @@
 (setq windmove-wrap-around t)
 
 (projectile-global-mode)
+
+;; -- avoid ruby deep indent -------------------------------------------------
+(setq ruby-deep-indent-paren nil)
