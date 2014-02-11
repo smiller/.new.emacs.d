@@ -9,3 +9,6 @@
   (let ((shell-file-name "/bin/bash"))
     ad-do-it))
 (ad-activate 'rspec-compile)
+
+(eval-after-load 'rspec-mode
+  '(rspec-install-snippets))

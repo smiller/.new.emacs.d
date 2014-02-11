@@ -63,6 +63,7 @@
     ruby-tools
     projectile-rails
     dired-details
+    yasnippet
 
     ;; from prelude
     ace-jump-mode
