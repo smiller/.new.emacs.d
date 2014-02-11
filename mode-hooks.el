@@ -15,3 +15,4 @@
   (lambda () (rvm-activate-corresponding-ruby)))
 (add-hook 'js-mode-hook 'my-code-mode-hook)
 (add-hook 'emacs-lisp-mode-hook 'my-code-mode-hook)
+(add-hook 'projectile-mode-hook 'projectile-rails-on)

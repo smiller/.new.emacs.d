@@ -61,6 +61,7 @@
     rinari
     robe
     ruby-tools
+    projectile-rails
 
     ;; from prelude
     ace-jump-mode
