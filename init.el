@@ -13,3 +13,4 @@
 (load "~/.emacs.d/mods-rspec")
 (load "~/.emacs.d/mods-ruby-tools")
 (load "~/.emacs.d/mods-typopunct")
+(load "~/.emacs.d/mods-yasnippet")
