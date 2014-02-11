@@ -47,3 +47,10 @@
   (lambda ()
     (interactive)
     (join-line -1)))
+
+;;
+
+(global-set-key (kbd "C-c r g q")
+  (lambda ()
+    (interactive)
+    (find-file "db/structure.sql")))
