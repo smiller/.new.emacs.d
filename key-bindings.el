@@ -7,6 +7,8 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
+(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
+
 (define-abbrev-table 'global-abbrev-table '(
   ("a5" "à")
   ("e5" "è")
