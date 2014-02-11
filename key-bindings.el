@@ -38,3 +38,10 @@
 ))
 
 (setq-default abbrev-mode t)
+
+;; http://whattheemacsd.com/key-bindings.el-03.html
+
+(global-set-key (kbd "M-j")
+  (lambda ()
+    (interactive)
+    (join-line -1)))

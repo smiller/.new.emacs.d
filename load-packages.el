@@ -62,6 +62,7 @@
     robe
     ruby-tools
     projectile-rails
+    dired-details
 
     ;; from prelude
     ace-jump-mode
