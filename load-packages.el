@@ -64,6 +64,9 @@
     projectile-rails
     dired-details
     yasnippet
+    enh-ruby-mode
+    flymake-ruby
+    company
 
     ;; from prelude
     ace-jump-mode

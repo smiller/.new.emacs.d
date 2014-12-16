@@ -17,3 +17,5 @@
 (load "~/.emacs.d/mods-ruby-tools")
 (load "~/.emacs.d/mods-typopunct")
 (load "~/.emacs.d/mods-yasnippet")
+(load "~/.emacs.d/mods-flymake-ruby")
+(load "~/.emacs.d/mods-robe")
