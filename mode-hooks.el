@@ -1,7 +1,8 @@
 (defun my-text-mode-hook ()
   (typopunct-mode)
-  (longlines-mode)
-  (linum-mode -1))
+  (linum-mode -1)
+  (set-input-method "TeX")
+)
 
 (add-hook 'text-mode-hook 'my-text-mode-hook)
 

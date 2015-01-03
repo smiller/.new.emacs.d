@@ -5,11 +5,11 @@
 (defun to-french()
   (interactive)
   (typopunct-change-language 'francais t))
-(global-set-key (kbd "C-c C-l C-f") 'to-french)
+(global-set-key (kbd "C-c C-g C-f") 'to-french)
 (defun to-english()
   (interactive)
   (typopunct-change-language 'english t))
-(global-set-key (kbd "C-c C-l C-e") 'to-english)
+(global-set-key (kbd "C-c C-g C-e") 'to-english)
 
 ;; http://www.emacswiki.org/emacs/TypographicalPunctuationMarks
 (defconst typopunct-ellipsis (decode-char 'ucs #x2026))
