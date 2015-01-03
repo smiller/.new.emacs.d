@@ -29,3 +29,5 @@
        (t
         (self-insert-command arg))))
     (define-key typopunct-map "." 'typopunct-insert-ellipsis-or-middot)
+
+(global-set-key (kbd "C-c d") 'typopunct-mode)
