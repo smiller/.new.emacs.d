@@ -9,43 +9,6 @@
 
 (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
 
-(define-abbrev-table 'global-abbrev-table '(
-  ("a5" "à")
-  ("e5" "è")
-  ("i5" "ì")
-  ("o5" "ò")
-  ("u5" "ù")
-  ("a6" "â")
-  ("e6" "ê")
-  ("i6" "î")
-  ("o6" "ô")
-  ("u6" "û")
-  ("c6" "ç")
-  ("a7" "á")
-  ("e7" "é")
-  ("i7" "í")
-  ("o7" "ó")
-  ("u7" "ú")
-  ("a8" "ā")
-  ("e8" "ē")
-  ("i8" "ī")
-  ("o8" "ō")
-  ("u8" "ū")
-  ("t8" "þ")
-  ("T8" "Þ")
-  ("d8" "ð")
-  ("D8" "Ð")
-  ("ae8" "æ")
-  ("AE8" "Æ")
-  ("a9" "ä")
-  ("e9" "ë")
-  ("i9" "ï")
-  ("o9" "ö")
-  ("u9" "ü")
-))
-
-(setq-default abbrev-mode t)
-
 ;; http://whattheemacsd.com/key-bindings.el-03.html
 
 (global-set-key (kbd "M-j")
