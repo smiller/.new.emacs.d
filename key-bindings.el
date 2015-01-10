@@ -22,3 +22,8 @@
   (lambda ()
     (interactive)
     (find-file "db/structure.sql")))
+
+(global-set-key (kbd "C-x RET <right>") 'windmove-right)
+(global-set-key (kbd "C-x RET <left>") 'windmove-left)
+(global-set-key (kbd "C-x RET <up>") 'windmove-up)
+(global-set-key (kbd "C-x RET <down>") 'windmove-down)
