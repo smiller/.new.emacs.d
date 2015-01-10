@@ -1,7 +1,7 @@
 (defun my-text-mode-hook ()
   (typopunct-mode)
   (linum-mode -1)
-  ('turn-on-auto-fill)
+  (auto-fill-mode 1)
   (set-input-method "TeX")
 )
 
