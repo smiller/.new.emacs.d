@@ -19,3 +19,4 @@
 (load "~/.emacs.d/mods-yasnippet")
 (load "~/.emacs.d/mods-flymake-ruby")
 (load "~/.emacs.d/mods-robe")
+(load "~/.emacs.d/mods-org")
