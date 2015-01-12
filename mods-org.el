@@ -29,6 +29,7 @@
 
 (defun begin-end-quote-for-region ()
   (interactive)
+  (remove-old-formatting)
   (insert "#+end_quote")
   (newline)
   (goto-char (region-beginning))
@@ -57,6 +58,7 @@
 
 (defun begin-end-verse-for-region ()
   (interactive)
+  (remove-old-formatting)
   (insert "#+end_verse")
   (newline)
   (goto-char (region-beginning))
@@ -73,4 +75,11 @@
   (newline)
   (previous-line)
   (previous-line)
+)
+
+(defun remove-old-formatting ()
+  (setq in (filter-buffer-substring (region-beginning) (region-end) t))
+  (setq out (replace-regexp-in-string "^> " "" in))
+  (setq out2 (replace-regexp-in-string "  <br/>$" "" out))
+  (insert out2)
 )
