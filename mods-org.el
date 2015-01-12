@@ -29,7 +29,7 @@
 
 (defun begin-end-quote-for-region ()
   (interactive)
-  (remove-old-formatting)
+  (fix-old-formatting)
   (insert "#+end_quote")
   (newline)
   (goto-char (region-beginning))
@@ -58,7 +58,7 @@
 
 (defun begin-end-verse-for-region ()
   (interactive)
-  (remove-old-formatting)
+  (fix-old-formatting)
   (insert "#+end_verse")
   (newline)
   (goto-char (region-beginning))
@@ -77,9 +77,21 @@
   (previous-line)
 )
 
-(defun remove-old-formatting ()
+(defun fix-old-formatting ()
+  (remove-old-formatting-code)
+  (indent-if-not-indented)
+)
+
+(defun remove-old-formatting-code ()
   (setq in (filter-buffer-substring (region-beginning) (region-end) t))
   (setq out (replace-regexp-in-string "^> " "" in))
   (setq out2 (replace-regexp-in-string "  <br/>$" "" out))
   (insert out2)
+)
+
+(defun indent-if-not-indented ()
+  (setq firstFour (filter-buffer-substring (region-beginning) (+ (region-beginning) 4)))
+  (if (not (string= firstFour "    "))
+      (indent-region (region-beginning) (region-end) 4)
+    )
 )
