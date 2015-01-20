@@ -53,3 +53,9 @@
 		  (find-file "2015.org")
                   (split-window-horizontally)
 		  (find-file "todo.org")))
+
+(global-set-key (kbd "C-c C-g C-u")
+		(lambda ()
+		  (interactive)
+		  (setq default-directory "~/code/autrui/")
+		  (dired ".")))
