@@ -67,6 +67,7 @@
     enh-ruby-mode
     flymake-ruby
     company
+    ace-window
 
     ;; from prelude
     ace-jump-mode

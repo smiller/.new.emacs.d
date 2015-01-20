@@ -8,6 +8,7 @@
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
+(global-set-key (kbd "C-x o") 'ace-window)
 
 ;; http://whattheemacsd.com/key-bindings.el-03.html
 
