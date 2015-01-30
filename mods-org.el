@@ -24,6 +24,10 @@
   (setq custom_id (read-from-minibuffer "CUSTOM_ID: "))
   (org-set-property "CUSTOM_ID" custom_id))
 
+(setq org-default-notes-file "~/Dropbox/gesta/notes.org")
+(define-key global-map "\C-cc" 'org-capture)
+(define-key global-map "\C-ca" 'org-agenda)
+
 (defun begin-end-quote ()
   (interactive)
   (if (use-region-p)
