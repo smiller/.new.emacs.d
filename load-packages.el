@@ -69,6 +69,12 @@
     company
     ace-window
 
+    ;; from smiller: trying out for org2blog
+    xml-rpc
+    metaweblog
+    org2blog
+    htmlize
+
     ;; from prelude
     ace-jump-mode
     dash

@@ -20,3 +20,4 @@
 (load "~/.emacs.d/mods-flymake-ruby")
 (load "~/.emacs.d/mods-robe")
 (load "~/.emacs.d/mods-org")
+(load "~/.emacs.d/mods-wp")
