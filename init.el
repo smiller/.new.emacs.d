@@ -1,4 +1,7 @@
-(load "~/.emacs.d/load-packages")
+(require 'cask "~/.cask/cask.el")
+(cask-initialize)
+
+;; (load "~/.emacs.d/load-packages")
 (load "~/.emacs.d/pbcopy")
 
 (load "~/.emacs.d/defaults")
@@ -11,7 +14,6 @@
 (load "~/.emacs.d/server")
 
 (load "~/.emacs.d/mods-dired")
-(load "~/.emacs.d/mods-enotify")
 (load "~/.emacs.d/mods-pbcopy")
 (load "~/.emacs.d/mods-rspec")
 (load "~/.emacs.d/mods-ruby-tools")
