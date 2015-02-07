@@ -3,28 +3,28 @@
 (ert-deftest test-begin-end-quote-new-content ()
   "Tests begin-end-quote without selected region string"
   (should (string= (with-temp-buffer
-		     (begin-end-quote)
+		     (my/begin-end-quote)
 		     (buffer-string))
 		   "#+begin_quote\n\n#+end_quote\n")))
 
 (ert-deftest test-begin-end-quote-new-point ()
   "Tests begin-end-quote without selected region cursor position"
   (should (equal (with-temp-buffer
-		   (begin-end-quote)
+		   (my/begin-end-quote)
 		   (point))
 		 (length "#+begin_quote\n\n"))))
 
 (ert-deftest test-begin-end-verse-new-content ()
   "Tests begin-end-verse without selected region string"
   (should (string= (with-temp-buffer
-		     (begin-end-verse)
+		     (my/begin-end-verse)
 		     (buffer-string))
 		   "#+begin_verse\n\n#+end_verse\n")))
 
 (ert-deftest test-begin-end-verse-new-point ()
   "Tests begin-end-verse without selected region cursor position"
   (should (equal (with-temp-buffer
-		   (begin-end-quote)
+		   (my/begin-end-quote)
 		   (point))
 		 (length "#+begin_verse\n\n"))))
 
@@ -33,7 +33,7 @@
   (should (string= (with-temp-buffer
 		     (insert "> Dear Sir, your astonishment’s odd;\n")
 		     (select-region)
-		     (begin-end-quote)
+		     (my/begin-end-quote)
 		     (buffer-string))
 		   "#+begin_quote\n    Dear Sir, your astonishment’s odd;\n#+end_quote\n")))
 
@@ -42,7 +42,7 @@
   (should (string= (with-temp-buffer
 		     (insert "> Dear Sir, your astonishment’s odd;  <br/>\n")
 		     (select-region)
-		     (begin-end-verse)
+		     (my/begin-end-verse)
 		     (buffer-string))
 		   "#+begin_verse\n    Dear Sir, your astonishment’s odd;\n#+end_verse\n")))
 
@@ -51,7 +51,7 @@
   (should (string= (with-temp-buffer
 		     (insert "> Dear Sir, your astonishment’s odd; <br/>\n")
 		     (select-region)
-		     (begin-end-verse)
+		     (my/begin-end-verse)
 		     (buffer-string))
 		   "#+begin_verse\n    Dear Sir, your astonishment’s odd;\n#+end_verse\n")))
 
@@ -60,7 +60,7 @@
   (should (string= (with-temp-buffer
 		     (insert "> Dear Sir, your astonishment’s odd;<br/>\n")
 		     (select-region)
-		     (begin-end-verse)
+		     (my/begin-end-verse)
 		     (buffer-string))
 		   "#+begin_verse\n    Dear Sir, your astonishment’s odd;\n#+end_verse\n")))
 
@@ -69,7 +69,7 @@
   (should (string= (with-temp-buffer
 		     (insert "    talsernilli barenya-tar falon enyi\n")
 		     (select-region)
-		     (begin-end-quote)
+		     (my/begin-end-quote)
 		     (buffer-string))
 		   "#+begin_quote\n    talsernilli barenya-tar falon enyi\n#+end_quote\n")))
 
@@ -78,7 +78,7 @@
   (should (string= (with-temp-buffer
 		     (insert "    i talessen\n    talalor ar-entai kirenyi\n    basleth solth sares\n")
 		     (select-region)
-		     (begin-end-verse)
+		     (my/begin-end-verse)
 		     (buffer-string))
 		   "#+begin_verse\n    i talessen\n    talalor ar-entai kirenyi\n    basleth solth sares\n#+end_verse\n")))
 
@@ -87,7 +87,7 @@
   (should (string= (with-temp-buffer
 		     (insert "    count > 42\n")
 		     (select-region)
-		     (begin-end-quote)
+		     (my/begin-end-quote)
 		     (buffer-string))
 		   "#+begin_quote\n    count > 42\n#+end_quote\n")))
 
@@ -96,7 +96,7 @@
   (should (string= (with-temp-buffer
 		     (insert "    count > 42<br/>\n")
 		     (select-region)
-		     (begin-end-verse)
+		     (my/begin-end-verse)
 		     (buffer-string))
 		   "#+begin_verse\n    count > 42\n#+end_verse\n")))
 
