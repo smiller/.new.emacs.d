@@ -100,6 +100,33 @@
 		     (buffer-string))
 		   "#+begin_verse\n    count > 42\n#+end_verse\n")))
 
+(ert-deftest test-begin-end-example ()
+  "Tests begin-end-example"
+  (should (string= (with-temp-buffer
+		     (insert "exemplaria\ninter alia\n")
+		     (select-region)
+		     (my/begin-end-example)
+		     (buffer-string))
+		   "#+begin_example\nexemplaria\ninter alia\n#+end_example\n")))
+
+(ert-deftest test-begin-end-src-emacs-lisp ()
+  "Tests begin-end-src-emacs-lisp"
+  (should (string= (with-temp-buffer
+		     (insert "(defun my/begin-end-example\n(interactive)\n(my/begin-end \"example\"))\n")
+		     (select-region)
+		     (my/begin-end-src-emacs-lisp)
+		     (buffer-string))
+		   "#+begin_src emacs-lisp\n(defun my/begin-end-example\n(interactive)\n(my/begin-end \"example\"))\n#+end_src\n")))
+
+(ert-deftest test-begin-end-src-ruby ()
+  "Tests begin-end-src-ruby"
+  (should (string= (with-temp-buffer
+		     (insert "class User < ActiveRecord::Base\n  include Permissions\n")
+		     (select-region)
+		     (my/begin-end-src-ruby)
+		     (buffer-string))
+		   "#+begin_src ruby\nclass User < ActiveRecord::Base\n  include Permissions\n#+end_src\n")))
+
 (defun select-region ()
   (goto-char (point-min))
   (set-mark-command nil)

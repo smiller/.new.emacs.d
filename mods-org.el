@@ -29,26 +29,38 @@
 
 (defun my/begin-end-quote ()
   (interactive)
-  (my/begin-end "quote"))
+  (my/begin-end "quote" "quote"))
 
 (defun my/begin-end-verse ()
   (interactive)
-  (my/begin-end "verse"))
+  (my/begin-end "verse" "verse"))
 
-(defun my/begin-end (variant)
+(defun my/begin-end-example ()
+  (interactive)
+  (my/begin-end "example" "example"))
+
+(defun my/begin-end-src-emacs-lisp ()
+  (interactive)
+  (my/begin-end "src emacs-lisp" "src"))
+
+(defun my/begin-end-src-ruby ()
+  (interactive)
+  (my/begin-end "src ruby" "src"))
+
+(defun my/begin-end (begin-tag end-tag)
   (interactive)
   (let ((cited-string "\n"))
     (when (use-region-p)
       (setq cited-string
-	    (my/fix-formatting (buffer-substring-no-properties (region-beginning) (region-end))))
+	    (my/remove-old-citation-formatting (buffer-substring-no-properties (region-beginning) (region-end))))
       (delete-region (region-beginning) (region-end)))
-    (insert "#+begin_" variant "\n"
+    (insert "#+begin_" begin-tag "\n"
 	    cited-string
-	    "#+end_" variant "\n"))
+	    "#+end_" end-tag "\n"))
     (unless (use-region-p)
       (forward-line -2)))
 
-(defun my/fix-formatting (str)
+(defun my/remove-old-citation-formatting (str)
   (interactive)
   (if (string= (substring str 0 2) "> ")
       (replace-regexp-in-string "^> " "    "

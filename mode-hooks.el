@@ -5,6 +5,9 @@
   (set-input-method "TeX")
   (define-key org-mode-map (kbd "M-s M-q") 'my/begin-end-quote)
   (define-key org-mode-map (kbd "M-s M-v") 'my/begin-end-verse)
+  (define-key org-mode-map (kbd "M-s M-x") 'my/begin-end-example)
+  (define-key org-mode-map (kbd "M-s M-e") 'my/begin-end-src-emacs-lisp)
+  (define-key org-mode-map (kbd "M-s M-r") 'my/begin-end-src-ruby)
 )
 
 (add-hook 'text-mode-hook 'my-text-mode-hook)
