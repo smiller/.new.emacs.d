@@ -3,8 +3,8 @@
   (linum-mode -1)
   (auto-fill-mode 1)
   (set-input-method "TeX")
-  (define-key org-mode-map (kbd "M-s M-q") 'begin-end-quote)
-  (define-key org-mode-map (kbd "M-s M-v") 'begin-end-verse)
+  (define-key org-mode-map (kbd "M-s M-q") 'my/begin-end-quote)
+  (define-key org-mode-map (kbd "M-s M-v") 'my/begin-end-verse)
 )
 
 (add-hook 'text-mode-hook 'my-text-mode-hook)

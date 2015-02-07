@@ -94,7 +94,7 @@
 (ert-deftest test-begin-end-verse-region-newer-styling-with-medial-gt ()
   "Tests begin-end-verse with selected region, new styling, with > in line"
   (should (string= (with-temp-buffer
-		     (insert "    count > 42<br/>\n")
+		     (insert "    count > 42\n")
 		     (select-region)
 		     (my/begin-end-verse)
 		     (buffer-string))
