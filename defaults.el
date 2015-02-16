@@ -20,3 +20,6 @@
 
 ;; -- avoid ruby deep indent -------------------------------------------------
 (setq ruby-deep-indent-paren nil)
+
+;; -- delete trailing whitespace ---------------------------------------------
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
