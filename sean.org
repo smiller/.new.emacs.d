@@ -1,0 +1,493 @@
+#+TITLE: Sean Miller’s Emacs Configuration
+
+* Emacs Config
+
+** Defaults
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    ;; -- disable stuff ----------------------------------------------------------
+    (setq make-backup-files nil)
+    (setq auto-save-default nil)
+    (setq inhibit-startup-message t)
+    (fset 'yes-or-no-p 'y-or-n-p)
+    (menu-bar-mode -1)
+
+    ;; -- rows and columns -------------------------------------------------------
+    (setq line-number-mode t)
+    (setq column-number-mode t)
+    (setq linum-format "%4d ")
+    (setq-default fill-column 80)
+
+    ;; -- windmove ---------------------------------------------------------------
+    (define-key input-decode-map "\e[1;2A" [S-up])
+    (windmove-default-keybindings)
+    (setq windmove-wrap-around t)
+
+    (require 'projectile)
+    (projectile-global-mode)
+
+    ;; -- avoid ruby deep indent -------------------------------------------------
+    (setq ruby-deep-indent-paren nil)
+
+    ;; -- delete trailing whitespace ---------------------------------------------
+    (add-hook 'before-save-hook 'delete-trailing-whitespace)
+#+END_SRC
+
+** Mode hooks
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (defun my-text-mode-hook ()
+      (typopunct-mode)
+      (linum-mode -1)
+      (auto-fill-mode 1)
+      (set-input-method "TeX")
+      (define-key org-mode-map (kbd "M-s M-q") 'my/begin-end-quote)
+      (define-key org-mode-map (kbd "M-s M-v") 'my/begin-end-verse)
+      (define-key org-mode-map (kbd "M-s M-x") 'my/begin-end-example)
+      (define-key org-mode-map (kbd "M-s M-e") 'my/begin-end-src-emacs-lisp)
+      (define-key org-mode-map (kbd "M-s M-r") 'my/begin-end-src-ruby)
+    )
+
+    (add-hook 'text-mode-hook 'my-text-mode-hook)
+
+    (defun my-code-mode-hook ()
+      (whitespace-mode)
+      (linum-mode)
+      (typopunct-mode -1))
+
+    (add-hook 'ruby-mode-hook 'my-code-mode-hook)
+    (add-hook 'ruby-mode-hook
+      (lambda () (rvm-activate-corresponding-ruby)))
+    (add-hook 'js-mode-hook 'my-code-mode-hook)
+    (add-hook 'emacs-lisp-mode-hook 'my-code-mode-hook)
+
+    (require 'projectile-rails)
+    (add-hook 'projectile-mode-hook 'projectile-rails-on)
+
+    (require 'overseer)
+    (add-hook 'emacs-lisp-mode-hook 'overseer-mode-hook)
+#+END_SRC
+
+** Global key bindings
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (global-set-key (kbd "C-c f") 'projectile-find-file)
+    (global-set-key (kbd "C-c h") 'helm-projectile)
+
+    (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+
+    (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+    (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+    (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+    (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
+    (global-set-key (kbd "C-x o") 'ace-window)
+
+    ;; http://whattheemacsd.com/key-bindings.el-03.html
+
+    (global-set-key (kbd "M-j")
+      (lambda ()
+	(interactive)
+	(join-line -1)))
+
+    ;;
+
+    (global-set-key (kbd "C-c r g q")
+      (lambda ()
+	(interactive)
+	(find-file "db/structure.sql")))
+
+    (global-set-key (kbd "C-x RET <right>") 'windmove-right)
+    (global-set-key (kbd "C-x RET <left>") 'windmove-left)
+    (global-set-key (kbd "C-x RET <up>") 'windmove-up)
+    (global-set-key (kbd "C-x RET <down>") 'windmove-down)
+#+END_SRC
+
+** Project-specific shortcuts
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (global-set-key (kbd "C-c C-g C-c")
+		    (lambda ()
+		      (interactive)
+		      (setq default-directory "~/.emacs.d/")
+		      (dired ".")))
+
+    (global-set-key (kbd "C-c C-g C-d")
+		    (lambda ()
+		      (interactive)
+		      (setq default-directory "~/Dropbox/gesta/")
+		      (dired ".")))
+
+    (global-set-key (kbd "C-c C-g C-h")
+		    (lambda ()
+		      (interactive)
+		      (setq default-directory "~/Dropbox/gesta/")
+		      (find-file "2015.org")))
+
+    (global-set-key (kbd "C-c C-g C-r")
+		    (lambda ()
+		      (interactive)
+		      (setq default-directory "~/Dropbox/gesta/")
+		      (find-file "emacs_roughs.org")))
+
+    (global-set-key (kbd "C-c C-g C-u")
+		    (lambda ()
+		      (interactive)
+		      (setq default-directory "~/code/autrui/")
+		      (dired ".")))
+
+    (global-set-key (kbd "C-c C-g C-w")
+		    (lambda ()
+		      (interactive)
+		      (setq default-directory "~/Dropbox/gesta/twc/")
+		      (dired ".")))
+#+END_SRC
+
+** Zenburn Theme
+
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+(defun zenburn-init ()
+  (load-theme 'zenburn t)
+)
+
+(add-hook 'after-init-hook 'zenburn-init)
+#+END_SRC
+
+** Emacs server and Emacsclient
+
+Setting up server for emacsclient, following
+- http://devblog.avdi.org/2010/04/23/daemonic-emacs/
+- http://devblog.avdi.org/2011/10/27/running-emacs-as-a-server-emacs-reboot-15/
+
+To use it: create and chmod +x /usr/local/bin/ec
+
+#+BEGIN_SRC bash :tangle no
+    #!/bin/sh
+    exec /usr/bin/env emacsclient -c -a '' $*
+#+END_SRC
+
+and add export EDITOR=ec to ~/.zshrc
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (server-start)
+#+END_SRC
+
+** Dired
+
+Sets Dired Omit Mode to omit “uninteresting” files (default ., .., autosave files)
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (require 'dired-x)
+    (setq-default dired-omit-files-p t)
+#+END_SRC
+
+Maked Dired less verbose, following: http://whattheemacsd.com/setup-dired.el-01.html
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (require 'dired-details)
+    (setq-default dired-details-hidden-string "--- ")
+    (dired-details-install)
+#+END_SRC
+
+Get M-< and M-> to play nice in Dired (first file and last file, not top and
+bottom), following:  http://whattheemacsd.com/setup-dired.el-02.html
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (defun dired-back-to-top ()
+      (interactive)
+      (beginning-of-buffer)
+      (dired-next-line (if dired-omit-mode 1 4)))
+
+    (define-key dired-mode-map
+      (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
+
+    (defun dired-jump-to-bottom ()
+      (interactive)
+      (end-of-buffer)
+      (dired-next-line -1))
+
+    (define-key dired-mode-map
+      (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
+#+END_SRC
+
+** Ruby and RSpec
+
+RSpec Mode
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (require 'rspec-mode)
+
+    (setq rspec-use-rvm t)
+    (setq rspec-use-rake-when-possible nil)
+    (setq rspec-use-zeus-when-possible t)
+
+    (defadvice rspec-compile (around rspec-compile-around)
+      "Use BASH shell for running the specs because of ZSH issues."
+      (let ((shell-file-name "/bin/bash"))
+	ad-do-it))
+    (ad-activate 'rspec-compile)
+
+    (eval-after-load 'rspec-mode
+      '(rspec-install-snippets))
+#+END_SRC
+
+Ruby Tools Mode, including senny-ruby-interpolate from
+http://blog.senny.ch/blog/2012/10/06/emacs-tidbits-for-ruby-developers/
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (require 'ruby-tools)
+
+    (global-set-key (kbd "C-c q :") 'ruby-tools-to-symbol)
+    (global-set-key (kbd "C-c q '") 'ruby-tools-to-single-quote-string)
+    (global-set-key (kbd "C-c q \"") 'ruby-tools-to-double-quote-string)
+
+    (defun senny-ruby-interpolate ()
+      "In a double quoted string, interpolate."
+      (interactive)
+      (insert "#")
+      (when (and
+	     (looking-back "\".*")
+	     (looking-at ".*\""))
+	(insert "{}")
+	(backward-char 1)))
+
+    (eval-after-load 'enh-ruby-mode
+      '(progn
+	 (define-key enh-ruby-mode-map (kbd "#") 'senny-ruby-interpolate)))
+#+END_SRC
+
+Flymake Ruby
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (require 'flymake-ruby)
+    (add-hook 'enh-ruby-mode-hook 'flymake-ruby-load)
+#+END_SRC
+
+Robe
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (require 'robe)
+    (add-hook 'enh-ruby-mode-hook 'robe-mode)
+
+    (defadvice inf-ruby-console-auto (before activate-rvm-for-robe activate)
+      (rvm-activate-corresponding-ruby))
+
+    (package-initialize)
+    (global-company-mode)
+    (push 'company-robe company-backends)
+#+END_SRC
+
+** Typopunct mode
+
+including ellipsis from http://www.emacswiki.org/emacs/TypographicalPunctuationMarks
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (require 'typopunct)
+
+    (typopunct-change-language 'english t)
+    ;; easy switch between French and English
+    (defun to-french()
+      (interactive)
+      (typopunct-change-language 'francais t))
+    (global-set-key (kbd "C-c C-g C-f") 'to-french)
+    (defun to-english()
+      (interactive)
+      (typopunct-change-language 'english t))
+    (global-set-key (kbd "C-c C-g C-e") 'to-english)
+
+    (defconst typopunct-ellipsis (decode-char 'ucs #x2026))
+	(defun typopunct-insert-ellipsis-or-middot (arg)
+	  "Change three consecutive dots to a typographical ellipsis mark."
+	  (interactive "p")
+	  (cond
+	   ((and (= 1 arg)
+		 (eq (char-before) ?^))
+	    (delete-char -1)
+	    (insert typopunct-middot))
+	   ((and (= 1 arg)
+		 (eq this-command last-command)
+		 (looking-back "\\.\\."))
+	    (replace-match "")
+	    (insert typopunct-ellipsis))
+	   (t
+	    (self-insert-command arg))))
+	(define-key typopunct-map "." 'typopunct-insert-ellipsis-or-middot)
+
+    (global-set-key (kbd "C-c t") 'typopunct-mode)
+#+END_SRC
+
+** Org Mode
+
+Publish ~/Dropbox/gesta org to ~/Dropbox/gesta_html
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (setq org-export-with-sub-superscripts nil)
+
+    (global-set-key (kbd "C-c C-g C-p")
+		    (lambda ()
+		      (interactive)
+		      (org-publish-project "org")))
+
+    (require 'ox-publish)
+    (setq org-publish-project-alist
+	  '(
+	    ("org"
+	     :base-directory "~/Dropbox/gesta/"
+	     :base-extension "org"
+	     :publishing-directory "~/Dropbox/gesta_html/"
+	     :recursive t
+	     :publishing-function org-html-publish-to-html
+	     :headline-levels 4             ; Just the default for this project.
+	     :auto-preamble t
+	     )
+	    ))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+      '( (ruby . t)
+	 (emacs-lisp . t)
+       ))
+
+    (defun cid (custom-id)
+      (interactive "MCUSTOM_ID: ")
+      (org-set-property "CUSTOM_ID" custom-id))
+
+    (setq org-default-notes-file "~/Dropbox/gesta/notes.org")
+    (define-key global-map "\C-cc" 'org-capture)
+    (define-key global-map "\C-ca" 'org-agenda)
+#+END_SRC
+
+-----
+
+** my/begin-end custom functions
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-code.el
+    (defun my/begin-end-quote ()
+      (interactive)
+      (my/begin-end "quote" "quote"))
+
+    (defun my/begin-end-verse ()
+      (interactive)
+      (my/begin-end "verse" "verse"))
+
+    (defun my/begin-end-example ()
+      (interactive)
+      (my/begin-end "example" "example"))
+
+    (defun my/begin-end-src-emacs-lisp ()
+      (interactive)
+      (my/begin-end "src emacs-lisp" "src"))
+
+    (defun my/begin-end-src-ruby ()
+      (interactive)
+      (my/begin-end "src ruby" "src"))
+
+    (defun my/begin-end (begin-tag end-tag)
+      (interactive)
+      (let ((cited-string "\n"))
+	(when (use-region-p)
+	  (setq cited-string
+		(my/remove-old-citation-formatting (buffer-substring-no-properties (region-beginning) (region-end))))
+	  (delete-region (region-beginning) (region-end)))
+	(insert "#+begin_" begin-tag "\n"
+		cited-string
+		"#+end_" end-tag "\n"))
+	(unless (use-region-p)
+	  (forward-line -2)))
+
+    (defun my/remove-old-citation-formatting (str)
+      (interactive)
+      (if (string= (substring str 0 2) "> ")
+	  (replace-regexp-in-string "^> " "    "
+				    (replace-regexp-in-string "\s*<br/>" ""
+							      (replace-regexp-in-string "    $" ""
+								(replace-regexp-in-string "\n" "\n    " str))))
+	str))
+#+END_SRC
+
+** org2blog to WordPress
+
+Taking the org2blog instructions from
+http://vxlabs.com/2014/05/25/emacs-24-with-prelude-org2blog-and-wordpress/
+
+but following the org2blog README and using auth-source instead of netrc:
+https://github.com/punchagan/org2blog/commit/52be89507c337e5f74be831ca563a8023e0ec736
+
+Expects an ~/.authinfo file of the form:
+machine {my-machine-name} login {my-elogin} password {my-password}
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (setq org-directory "~/Dropbox/gesta/twc/")
+    ;; and you need this, else you'll get symbol void errors when doing
+    ;; fill paragraph
+    (setq org-list-allow-alphabetical t)
+
+    (require 'org2blog-autoloads)
+    (require 'auth-source)
+    (let (credentials)
+	    (add-to-list 'auth-sources "~/.authinfo")
+	    (setq credentials (auth-source-user-and-password "thewanderingcoder"))
+	    (setq org2blog/wp-blog-alist
+		  `(("twc"
+		     :url "http://thewanderingcoder.com/xmlrpc.php"
+		     :username ,(car credentials)
+		     :password ,(cadr credentials)
+		     :default-title "Hello World"
+		     :default-categories ("org2blog" "emacs")
+		     :tags-as-categories nil))))
+
+    ;; http://blog.binchen.org/posts/how-to-use-org2blog-effectively-as-a-programmer.html
+    ;; has half the instructions, but was missing
+    ;; `wp-use-sourcecode-shortcode` at the time of this writing, without
+    ;; which this does not work at all.
+
+    ;; * `M-x package-install RET htmlize` is required, else you get empty
+    ;;   code blocks https://github.com/punchagan/org2blog/blob/master/org2blog.el
+    ;; * with wp-use-sourcecode-shortcode set to 't, org2blog will use 1
+    ;;   shortcodes, and hence the SyntaxHighlighter Evolved plugin on your blog.
+    ;;   however, if you set this to nil, native Emacs highlighting will be used,
+    ;;   implemented as HTML styling. Your pick!
+    (setq org2blog/wp-use-sourcecode-shortcode 't)
+    ;; removed light="true"
+    (setq org2blog/wp-sourcecode-default-params nil)
+    ;; target language needs to be in here
+    (setq org2blog/wp-sourcecode-langs
+	  '("actionscript3" "bash" "coldfusion" "cpp" "csharp" "css" "delphi"
+	    "erlang" "fsharp" "diff" "groovy" "javascript" "java" "javafx" "matlab"
+	    "objc" "perl" "php" "text" "powershell" "python" "ruby" "scala" "sql"
+	    "vb" "xml"
+	    "sh" "emacs-lisp" "lisp" "lua"))
+
+    ;; this will use emacs syntax higlighting in your #+BEGIN_SRC
+    ;; <language> <your-code> #+END_SRC code blocks.
+    (setq org-src-fontify-natively t)
+#+END_SRC
+
+** pbcopy
+
+Enable pbcopy, so kill-ring can interact with Mac OS X clipboard:
+https://github.com/vmalloc/emacs/blob/master/custom/pbcopy.el
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (require 'pbcopy)
+    (turn-on-pbcopy)
+#+END_SRC
+
+** yasnippet
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (require 'yasnippet)
+    (yas-global-mode 1)
+#+END_SRC
+** Run org-babel-tangle on saving sean.org
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (defun my/tangle-on-save-emacs-config-org-file()
+      (when (string= buffer-file-name (file-truename "~/.emacs.d/sean.org"))
+	(org-babel-tangle)))
+
+    (add-hook 'after-save-hook 'my/tangle-on-save-emacs-config-org-file)
+#+END_SRC

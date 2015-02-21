@@ -26,6 +26,8 @@
 (depends-on "robe")
 (depends-on "company")
 
+(depends-on "pbcopy")
+
 (development
  (depends-on "f")
  (depends-on "ecukes")
