@@ -1,4 +1,5 @@
 #+TITLE: Sean Miller’s Emacs Configuration
+#+STARTUP: showall
 
 * Emacs Config
 
@@ -106,41 +107,67 @@
 ** Project-specific shortcuts
 
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
-    (global-set-key (kbd "C-c C-g C-c")
-		    (lambda ()
-		      (interactive)
-		      (setq default-directory "~/.emacs.d/")
-		      (dired ".")))
+    (defun my/to-file (dir file)
+        (interactive)
+        (setq default-directory dir)
+        (find-file file))
 
-    (global-set-key (kbd "C-c C-g C-d")
-		    (lambda ()
-		      (interactive)
-		      (setq default-directory "~/Dropbox/gesta/")
-		      (dired ".")))
+    (defun my/to-dir (dir)
+        (interactive)
+        (setq default-directory dir)
+        (dired "."))
 
-    (global-set-key (kbd "C-c C-g C-h")
-		    (lambda ()
-		      (interactive)
-		      (setq default-directory "~/Dropbox/gesta/")
-		      (find-file "2015.org")))
+    (defun my/to-gesta-file (file)
+        (interactive)
+        (my/to-file "~/Dropbox/gesta/" file))
 
-    (global-set-key (kbd "C-c C-g C-r")
-		    (lambda ()
-		      (interactive)
-		      (setq default-directory "~/Dropbox/gesta/")
-		      (find-file "emacs_roughs.org")))
+    (defun my/to-emacs-config ()
+        (interactive)
+        (my/to-file "~/.emacs.d/" "sean.org"))
 
-    (global-set-key (kbd "C-c C-g C-u")
-		    (lambda ()
-		      (interactive)
-		      (setq default-directory "~/code/autrui/")
-		      (dired ".")))
+    (defun my/to-autrui ()
+	(interactive)
+	(my/to-dir "~/code/autrui/"))
 
-    (global-set-key (kbd "C-c C-g C-w")
-		    (lambda ()
-		      (interactive)
-		      (setq default-directory "~/Dropbox/gesta/twc/")
-		      (dired ".")))
+    (defun my/to-gesta ()
+	(interactive)
+	(my/to-dir "~/Dropbox/gesta/"))
+
+    (defun my/to-today ()
+	(interactive)
+	(my/to-gesta-file "2015.org"))
+
+    (defun my/to-readings ()
+	(interactive)
+	(my/to-gesta-file "readings.org"))
+
+    (defun my/to-writings ()
+	(interactive)
+	(my/to-gesta-file "writings.org"))
+
+    (defun my/to-twc ()
+	(interactive)
+	(my/to-dir "~/Dropbox/gesta/twc/"))
+
+    (defun my/pick-destination (pick)
+	(interactive "ce = ~/.emacs.d/sean.org a = ~/code/autrui/ g = ~/Dropbox/gesta/ h = …/2015.org r = …/readings.org w = …/writings.org t = …/twc/ ? ")
+	(case pick
+	  (?e (my/to-emacs-config))
+	  (?a (my/to-autrui))
+	  (?g (my/to-gesta))
+	  (?h (my/to-today))
+	  (?r (my/to-readings))
+	  (?w (my/to-writings))
+	  (?t (my/to-twc))))
+
+    (global-set-key (kbd "C-x j e") 'my/to-emacs-config)
+    (global-set-key (kbd "C-x j a") 'my/to-autrui)
+    (global-set-key (kbd "C-x j g") 'my/to-gesta)
+    (global-set-key (kbd "C-x j h") 'my/to-today)
+    (global-set-key (kbd "C-x j r") 'my/to-readings)
+    (global-set-key (kbd "C-x j w") 'my/to-writings)
+    (global-set-key (kbd "C-x j t") 'my/to-twc)
+    (global-set-key (kbd "C-x j j") 'my/pick-destination)
 #+END_SRC
 
 ** Zenburn Theme
