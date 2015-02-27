@@ -19,6 +19,8 @@
 (depends-on "org2blog")
 (depends-on "htmlize")
 
+(depends-on "helm")
+(depends-on "helm-projectile")
 (depends-on "projectile")
 (depends-on "projectile-rails")
 

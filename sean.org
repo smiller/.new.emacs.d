@@ -25,8 +25,9 @@
     (setq windmove-wrap-around t)
 
     (require 'projectile)
+    (setq projectile-keymap-prefix (kbd "C-c p"))
     (projectile-global-mode)
-
+    (setq projectile-completion-system 'default)
     ;; -- avoid ruby deep indent -------------------------------------------------
     (setq ruby-deep-indent-paren nil)
 
@@ -521,3 +522,11 @@ https://github.com/vmalloc/emacs/blob/master/custom/pbcopy.el
 
     (add-hook 'after-save-hook 'my/tangle-on-save-emacs-config-org-file)
 #+END_SRC
+
+** Helm
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (require 'helm)
+    (helm-mode)
+    (require 'helm-projectile)
+#+end_src
