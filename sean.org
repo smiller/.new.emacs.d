@@ -56,8 +56,11 @@
       (linum-mode)
       (typopunct-mode -1))
 
-    (add-hook 'ruby-mode-hook 'my-code-mode-hook)
-    (add-hook 'ruby-mode-hook
+    (add-hook 'enh-ruby-mode-hook 'my-code-mode-hook)
+    (add-hook 'enh-ruby-mode-hook
+      (lambda () (rvm-activate-corresponding-ruby)))
+    (add-hook 'feature-mode-hook 'my-code-mode-hook)
+    (add-hook 'feature-mode-hook
       (lambda () (rvm-activate-corresponding-ruby)))
     (add-hook 'js-mode-hook 'my-code-mode-hook)
     (add-hook 'emacs-lisp-mode-hook 'my-code-mode-hook)

@@ -2,6 +2,8 @@
 (source melpa)
 (source marmalade) ;; typopunct not in melpa
 
+(depends-on "rvm")
+
 (depends-on "pt")
 (depends-on "feature-mode")
 (depends-on "rspec-mode")
