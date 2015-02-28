@@ -108,83 +108,6 @@
     (global-set-key (kbd "C-x RET <down>") 'windmove-down)
 #+END_SRC
 
-** Project-specific shortcuts
-
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
-    (defun my/to-file (dir file)
-        (interactive)
-        (setq default-directory dir)
-        (find-file file))
-
-    (defun my/to-dir (dir)
-        (interactive)
-        (setq default-directory dir)
-        (dired "."))
-
-    (defun my/to-gesta-file (file)
-        (interactive)
-        (my/to-file "~/Dropbox/gesta/" file))
-
-    (defun my/to-emacs-config ()
-        (interactive)
-        (my/to-file "~/.emacs.d/" "sean.org"))
-
-    (defun my/to-autrui ()
-	(interactive)
-	(my/to-dir "~/code/autrui/"))
-
-    (defun my/to-gesta ()
-	(interactive)
-	(my/to-dir "~/Dropbox/gesta/"))
-
-    (defun my/to-today ()
-	(interactive)
-	(my/to-gesta-file "2015.org"))
-
-    (defun my/to-readings ()
-	(interactive)
-	(my/to-gesta-file "readings.org"))
-
-    (defun my/to-writings ()
-	(interactive)
-	(my/to-gesta-file "writings.org"))
-
-    (defun my/to-twc ()
-	(interactive)
-	(my/to-dir "~/Dropbox/gesta/twc/"))
-
-    (defun my/pick-destination (pick)
-	(interactive "ce = ~/.emacs.d/sean.org a = ~/code/autrui/ g = ~/Dropbox/gesta/ h = …/2015.org r = …/readings.org w = …/writings.org t = …/twc/ ? ")
-	(case pick
-	  (?e (my/to-emacs-config))
-	  (?a (my/to-autrui))
-	  (?g (my/to-gesta))
-	  (?h (my/to-today))
-	  (?r (my/to-readings))
-	  (?w (my/to-writings))
-	  (?t (my/to-twc))))
-
-    (global-set-key (kbd "C-x j e") 'my/to-emacs-config)
-    (global-set-key (kbd "C-x j a") 'my/to-autrui)
-    (global-set-key (kbd "C-x j g") 'my/to-gesta)
-    (global-set-key (kbd "C-x j h") 'my/to-today)
-    (global-set-key (kbd "C-x j r") 'my/to-readings)
-    (global-set-key (kbd "C-x j w") 'my/to-writings)
-    (global-set-key (kbd "C-x j t") 'my/to-twc)
-    (global-set-key (kbd "C-x j j") 'my/pick-destination)
-#+END_SRC
-
-** Zenburn Theme
-
-
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
-(defun zenburn-init ()
-  (load-theme 'zenburn t)
-)
-
-(add-hook 'after-init-hook 'zenburn-init)
-#+END_SRC
-
 ** Emacs server and Emacsclient
 
 Setting up server for emacsclient, following
@@ -497,6 +420,13 @@ machine {my-machine-name} login {my-elogin} password {my-password}
     (setq org-src-fontify-natively t)
 #+END_SRC
 
+** org2blog key bindings
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (define-key org-mode-map (kbd "C-c b d") 'org2blog/wp-post-buffer)
+    (define-key org-mode-map (kbd "C-c b p") 'org2blog/wp-post-buffer-and-publish)
+#+END_SRC
+
 ** pbcopy
 
 Enable pbcopy, so kill-ring can interact with Mac OS X clipboard:
@@ -529,4 +459,20 @@ https://github.com/vmalloc/emacs/blob/master/custom/pbcopy.el
     (require 'helm)
     (helm-mode)
     (require 'helm-projectile)
+#+end_src
+
+** Theme
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (defun theme-init ()
+      (load-theme 'zenburn t)
+    )
+
+    (add-hook 'after-init-hook 'theme-init)
+#+end_src
+
+** Bookmark+
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (require 'bookmark+)
 #+end_src

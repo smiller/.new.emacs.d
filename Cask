@@ -32,6 +32,8 @@
 
 (depends-on "pbcopy")
 
+(depends-on "bookmark+")
+
 (development
  (depends-on "f")
  (depends-on "ecukes")

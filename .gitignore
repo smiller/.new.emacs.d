@@ -2,7 +2,9 @@
 /.cask/*
 /auto-save-list/*
 /url/*
+/eshell/*
 projectile-bookmarks.eld
+projectile.cache
 TAGS
 bookmarks
 tangled-settings.el
