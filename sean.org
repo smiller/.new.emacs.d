@@ -476,3 +476,11 @@ https://github.com/vmalloc/emacs/blob/master/custom/pbcopy.el
 #+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
     (require 'bookmark+)
 #+end_src
+
+** org-journal						       :experimental:
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (require 'org-journal)
+    (setq org-journal-dir "~/Dropbox/journal/")
+    (setq org-journal-date-format "%A %-e %B %Y")
+#+end_src
