@@ -34,8 +34,6 @@
 
 (depends-on "bookmark+")
 
-(depends-on "org-journal")
-
 (development
  (depends-on "f")
  (depends-on "ecukes")
