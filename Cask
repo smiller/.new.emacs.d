@@ -4,7 +4,7 @@
 
 (depends-on "rvm")
 
-(depends-on "pt")
+(depends-on "ag")
 (depends-on "feature-mode")
 (depends-on "rspec-mode")
 (depends-on "typopunct")
