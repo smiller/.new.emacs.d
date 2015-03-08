@@ -477,3 +477,38 @@ https://github.com/vmalloc/emacs/blob/master/custom/pbcopy.el
 #+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
     (require 'bookmark+)
 #+end_src
+
+** 'my/note and 'my/event
+
+http://thewanderingcoder.com/2015/03/automating-boilerplate-in-org-mode-journalling/
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (defun my/note (title tags)
+      (interactive (list
+                     (read-from-minibuffer "Title? ")
+                     (read-from-minibuffer "Tags? ")))
+      (org-datetree-find-date-create (org-date-to-gregorian
+                                       (format-time-string "%Y-%m-%d")))
+      (org-end-of-subtree)
+      (insert "\n\n**** " (format-time-string "%H:%M") ". " title)
+      (unless (string= tags "")
+        (insert "  :" tags ":")
+      )
+      (insert "\n" (format-time-string "[%Y-%m-%d %H:%M]") "\n\n"))
+
+    (defun my/event (date end-time)
+      (interactive (list
+                     (org-read-date)
+                     (read-from-minibuffer "end time (e.g. 22:00)? ")))
+      (org-datetree-find-date-create (org-date-to-gregorian date))
+      (goto-char (line-end-position))
+      (setq start-time (nth 1 (split-string date)))
+      (if (string= start-time nil)
+        (setq start-time ""))
+      (insert "\n\n**** " start-time ". ")
+      (save-excursion
+	(if (string= end-time "")
+	  (setq timestamp-string date)
+	(setq timestamp-string (concat date "-" end-time)))
+	(insert "\n<" timestamp-string ">\n\n")))
+#+end_src
