@@ -34,6 +34,8 @@
 
 (depends-on "bookmark+")
 
+(depends-on "hydra")
+
 (development
  (depends-on "f")
  (depends-on "ecukes")

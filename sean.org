@@ -512,3 +512,21 @@ http://thewanderingcoder.com/2015/03/automating-boilerplate-in-org-mode-journall
 	(setq timestamp-string (concat date "-" end-time)))
 	(insert "\n<" timestamp-string ">\n\n")))
 #+end_src
+
+** Trying out hydra 					       :experimental:
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (require 'hydra)
+    (global-set-key
+      (kbd "C-c j")
+      (defhydra hydra-jump (:color blue)
+        "jump"
+        ("e" (find-file "~/.emacs.d/sean.org") ".emacs.d")
+        ("c" (find-file "~/.emacs.d/Cask") "Cask")
+
+        ("a" (find-file "~/code/autrui/") "autrui")
+        ("h" (find-file "~/Dropbox/gesta/2015.org") "hodie")
+        ("r" (find-file "~/Dropbox/gesta/readings.org") "readings")
+        ("w" (find-file "~/Dropbox/gesta/writings.org") "writings")
+        ("t" (find-file "~/Dropbox/gesta/twc/") "twc")))
+#+end_src
