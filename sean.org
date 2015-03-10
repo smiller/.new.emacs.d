@@ -530,3 +530,11 @@ http://thewanderingcoder.com/2015/03/automating-boilerplate-in-org-mode-journall
         ("w" (find-file "~/Dropbox/gesta/writings.org") "writings")
         ("t" (find-file "~/Dropbox/gesta/twc/") "twc")))
 #+end_src
+
+** Trying out guide-key					       :experimental:
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (require 'guide-key)
+    (setq guide-key/guide-key-sequence t)
+    (guide-key-mode 1)
+#+end_src

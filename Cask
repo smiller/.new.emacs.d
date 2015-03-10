@@ -35,6 +35,7 @@
 (depends-on "bookmark+")
 
 (depends-on "hydra")
+(depends-on "guide-key")
 
 (development
  (depends-on "f")
