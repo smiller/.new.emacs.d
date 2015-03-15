@@ -487,8 +487,7 @@ http://thewanderingcoder.com/2015/03/automating-boilerplate-in-org-mode-journall
       (interactive (list
                      (read-from-minibuffer "Title? ")
                      (read-from-minibuffer "Tags? ")))
-      (org-datetree-find-date-create (org-date-to-gregorian
-                                       (format-time-string "%Y-%m-%d")))
+      (my/find-or-create-date-headers (format-time-string "%Y-%m-%d 09:00"))
       (org-end-of-subtree)
       (insert "\n\n**** " (format-time-string "%H:%M") ". " title)
       (unless (string= tags "")
@@ -500,7 +499,10 @@ http://thewanderingcoder.com/2015/03/automating-boilerplate-in-org-mode-journall
       (interactive (list
                      (org-read-date)
                      (read-from-minibuffer "end time (e.g. 22:00)? ")))
-      (org-datetree-find-date-create (org-date-to-gregorian date))
+      (if (eq 1 (length (split-string date)))
+        (setq date (concat date " 09:00"))
+      )
+      (my/find-or-create-date-headers date)
       (goto-char (line-end-position))
       (setq start-time (nth 1 (split-string date)))
       (if (string= start-time nil)
@@ -511,6 +513,89 @@ http://thewanderingcoder.com/2015/03/automating-boilerplate-in-org-mode-journall
 	  (setq timestamp-string date)
 	(setq timestamp-string (concat date "-" end-time)))
 	(insert "\n<" timestamp-string ">\n\n")))
+
+
+    (defun my/find-or-create-date-headers (date)
+      (setq date-name (format-time-string "%A %-e %B %Y" (date-to-time date)))
+      (beginning-of-buffer)
+      (setq found (re-search-forward (concat "^\*\*\* " date-name) nil t))
+      (if found
+          (goto-char (point))
+        (my/create-date-headers date)
+      )
+    )
+
+    (defun my/create-date-headers (date)
+      (beginning-of-buffer)
+      (setq month-name (format-time-string "%B" (date-to-time date)))
+      (setq found (re-search-forward (concat "^\*\* " month-name) nil t))
+      (unless found
+        (my/create-header-for-month date)
+      )
+      (my/create-header-for-day date)
+    )
+
+    (defun my/create-header-for-month (date)
+      (setq added-month nil)
+      (setq month (nth 4 (org-parse-time-string date)))
+      (setq added-month-name (calendar-month-name month))
+      (if (= month 1)
+          (my/insert-month-header added-month-name)
+      )
+      (while (and (not added-month) (> month 1))
+        (setq month (1- month))
+        (setq month-name (calendar-month-name month))
+        (setq found (re-search-forward (concat "^\*\* " month-name) nil t))
+        (when found
+          (goto-char (point))
+          (my/insert-month-header added-month-name)
+        )
+      )
+      (unless added-month
+          (my/insert-month-header added-month-name)
+      )
+    )
+
+    (defun my/insert-month-header (month-name)
+      (org-end-of-subtree)
+      (insert "\n\n** " month-name)
+      (setq added-month t)
+    )
+
+    (defun my/create-header-for-day (date)
+      (my/go-to-month date)
+
+      (setq header-to-add (format-time-string "%A %-e %B %Y" (date-to-time date)))
+
+      (setq date-list (org-parse-time-string date))
+      (setq day (nth 3 date-list))
+      (setq month (nth 4 date-list))
+      (setq year (nth 5 date-list))
+      (setq added-day nil)
+
+      (while (and (not added-day) (> day 1))
+        (setq day (1- day))
+        (setq day-name (format-time-string "%A %-e %B %Y" (encode-time 0 0 0 day month year)))
+        (setq found (re-search-forward (concat "^\*\*\* " day-name) nil t))
+        (when found
+          (goto-char (point))
+          (org-end-of-subtree)
+          (insert "\n\n*** " header-to-add)
+          (setq added-day t)
+        )
+      )
+      (unless added-day
+        (insert "\n\n*** " header-to-add)
+      )
+    )
+
+    (defun my/go-to-month (date)
+      (setq month-name (format-time-string "%B" (date-to-time date)))
+      (setq found (re-search-forward (concat "^\*\* " month-name) nil t))
+      (when found
+        (goto-char (point))
+      )
+    )
 #+end_src
 
 ** Trying out hydra 					       :experimental:
