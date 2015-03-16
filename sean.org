@@ -121,7 +121,7 @@ To use it: create and chmod +x /usr/local/bin/ec
     exec /usr/bin/env emacsclient -c -a '' $*
 #+END_SRC
 
-and add export EDITOR=ec to ~/.zshrc
+and add =export EDITOR=ec= to =~/.zshrc=
 
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
     (server-start)
@@ -482,120 +482,118 @@ https://github.com/vmalloc/emacs/blob/master/custom/pbcopy.el
 
 http://thewanderingcoder.com/2015/03/automating-boilerplate-in-org-mode-journalling/
 
+C-x 8 RET   - insert Unicode, ZERO WIDTH SPACE
+
+Try out =C-c '​= for more awesomeness.
+
 #+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
     (defun my/note (title tags)
-      (interactive (list
-                     (read-from-minibuffer "Title? ")
-                     (read-from-minibuffer "Tags? ")))
+      (interactive "MTitle? \nMTags? ")
       (my/find-or-create-date-headers (format-time-string "%Y-%m-%d 09:00"))
       (org-end-of-subtree)
       (insert "\n\n**** " (format-time-string "%H:%M") ". " title)
       (unless (string= tags "")
-        (insert "  :" tags ":")
-      )
+        (insert "  :" tags ":"))
       (insert "\n" (format-time-string "[%Y-%m-%d %H:%M]") "\n\n"))
 
     (defun my/event (date end-time)
       (interactive (list
                      (org-read-date)
                      (read-from-minibuffer "end time (e.g. 22:00)? ")))
-      (if (eq 1 (length (split-string date)))
-        (setq date (concat date " 09:00"))
-      )
+      (if (= 1 (length (split-string date)))
+        (setq date (concat date " 09:00")))
       (my/find-or-create-date-headers date)
       (goto-char (line-end-position))
-      (setq start-time (nth 1 (split-string date)))
-      (if (string= start-time nil)
-        (setq start-time ""))
-      (insert "\n\n**** " start-time ". ")
+      (let ((start-time (or (nth 1 (split-string date)) "")))
+        (insert "\n\n**** " start-time ". "))
       (save-excursion
-	(if (string= end-time "")
-	  (setq timestamp-string date)
-	(setq timestamp-string (concat date "-" end-time)))
-	(insert "\n<" timestamp-string ">\n\n")))
+        (if (string= end-time "")
+            (setq timestamp-string date)
+          (setq timestamp-string (concat date "-" end-time)))
+        (insert "\n<" timestamp-string ">\n\n")))
 
-
-    (defun my/find-or-create-date-headers (date)
-      (setq date-name (format-time-string "%A %-e %B %Y" (date-to-time date)))
+  (defun my/find-or-create-date-headers (date)
+    (let ((date-name
+           (format-time-string "%A %-e %B %Y" (date-to-time date)))
+          found)
       (beginning-of-buffer)
       (setq found (re-search-forward (concat "^\*\*\* " date-name) nil t))
       (if found
           (goto-char (point))
-        (my/create-date-headers date)
-      )
-    )
+        (my/create-date-headers date))))
 
-    (defun my/create-date-headers (date)
-      (beginning-of-buffer)
-      (setq month-name (format-time-string "%B" (date-to-time date)))
-      (setq found (re-search-forward (concat "^\*\* " month-name) nil t))
+  (defun my/create-date-headers (date)
+    (beginning-of-buffer)
+    (let* ((month-name
+           (format-time-string "%B" (date-to-time date)))
+           (found (re-search-forward (concat "^\*\* " month-name) nil t)))
       (unless found
-        (my/create-header-for-month date)
-      )
-      (my/create-header-for-day date)
-    )
+        (my/create-header-for-month date)))
+    (my/create-header-for-day date))
 
-    (defun my/create-header-for-month (date)
-      (setq added-month nil)
-      (setq month (nth 4 (org-parse-time-string date)))
-      (setq added-month-name (calendar-month-name month))
+  (defun my/create-header-for-month (date)
+    (let* ((added-month nil)
+           (month (nth 4 (org-parse-time-string date)))
+           (added-month-name (calendar-month-name month))
+           month-name
+           found)
       (if (= month 1)
           (my/insert-month-header added-month-name)
-      )
-      (while (and (not added-month) (> month 1))
-        (setq month (1- month))
-        (setq month-name (calendar-month-name month))
-        (setq found (re-search-forward (concat "^\*\* " month-name) nil t))
-        (when found
-          (goto-char (point))
-          (my/insert-month-header added-month-name)
-        )
-      )
-      (unless added-month
-          (my/insert-month-header added-month-name)
-      )
-    )
+        (while (and (not found) (> month 1))
+          (setq month (1- month))
+          (setq month-name (calendar-month-name month))
+          (setq found (re-search-forward (concat "^\*\* " month-name) nil t)))
+        (my/insert-month-header added-month-name))))
 
-    (defun my/insert-month-header (month-name)
-      (org-end-of-subtree)
-      (insert "\n\n** " month-name)
-      (setq added-month t)
-    )
+  (defun my/insert-month-header (month-name)
+    (condition-case error
+        (org-end-of-subtree)
+      (error nil))
+    (insert "\n\n** " month-name))
 
     (defun my/create-header-for-day (date)
       (my/go-to-month date)
+      (let ((header-to-add (format-time-string "%A %-e %B %Y" (date-to-time date)))
+            (date-list (org-parse-time-string date))
+            (day (nth 3 date-list))
+            day-name
+            found
+            (month (nth 4 date-list))
+            (year (nth 5 date-list))
+            (added-day nil))
+        (while (and (not added-day) (> day 1))
+          (setq day (1- day))
+          (setq day-name (format-time-string "%A %-e %B %Y"
+                                             (encode-time 0 0 0 day month year)))
+          (setq found (re-search-forward (concat "^\*\*\* " day-name) nil t))
+          (when found
+            (goto-char (point))
+            (org-end-of-subtree)
+            (insert "\n\n*** " header-to-add)
+            (setq added-day t)))
+        (unless added-day
+          (insert "\n\n*** " header-to-add))))
 
-      (setq header-to-add (format-time-string "%A %-e %B %Y" (date-to-time date)))
+  (defun my/go-to-month (date)
+    (let ((month-name (format-time-string "%B" (date-to-time date)))
+          (found (re-search-forward (concat "^\*\* " month-name) nil t)))))
+#+end_src
 
-      (setq date-list (org-parse-time-string date))
-      (setq day (nth 3 date-list))
-      (setq month (nth 4 date-list))
-      (setq year (nth 5 date-list))
-      (setq added-day nil)
+** Capture templates
 
-      (while (and (not added-day) (> day 1))
-        (setq day (1- day))
-        (setq day-name (format-time-string "%A %-e %B %Y" (encode-time 0 0 0 day month year)))
-        (setq found (re-search-forward (concat "^\*\*\* " day-name) nil t))
-        (when found
-          (goto-char (point))
-          (org-end-of-subtree)
-          (insert "\n\n*** " header-to-add)
-          (setq added-day t)
-        )
-      )
-      (unless added-day
-        (insert "\n\n*** " header-to-add)
-      )
-    )
+#+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+(setq org-capture-templates
+      '(("r" "Test capture" plain
+         (function my/org-capture-date-function)
+         "**** %^{Title}   %^g\n%?")))
 
-    (defun my/go-to-month (date)
-      (setq month-name (format-time-string "%B" (date-to-time date)))
-      (setq found (re-search-forward (concat "^\*\* " month-name) nil t))
-      (when found
-        (goto-char (point))
-      )
-    )
+(defun my/org-capture-date-function ()
+  (interactive)
+  (let ((date (org-read-date)))
+    (find-file (concat "~/tmp/" (substring date 0 4) ".org"))
+    (if (= 1 (length (split-string date)))
+      (setq date (concat date " 09:00")))
+    (my/find-or-create-date-headers date)))
 #+end_src
 
 ** Trying out hydra 					       :experimental:
