@@ -60,10 +60,14 @@
     (add-hook 'enh-ruby-mode-hook 'my-code-mode-hook)
     (add-hook 'enh-ruby-mode-hook
       (lambda () (rvm-activate-corresponding-ruby)))
+    (add-hook 'enh-ruby-mode-hook 'rubocop-mode)
+
     (add-hook 'feature-mode-hook 'my-code-mode-hook)
     (add-hook 'feature-mode-hook
       (lambda () (rvm-activate-corresponding-ruby)))
+
     (add-hook 'js-mode-hook 'my-code-mode-hook)
+
     (add-hook 'emacs-lisp-mode-hook 'my-code-mode-hook)
 
     (require 'projectile-rails)

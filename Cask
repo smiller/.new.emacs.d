@@ -37,6 +37,9 @@
 (depends-on "hydra")
 (depends-on "guide-key")
 
+(depends-on "rubocop")
+(depends-on "flycheck")
+
 (development
  (depends-on "f")
  (depends-on "ecukes")
