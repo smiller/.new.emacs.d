@@ -609,6 +609,8 @@ http://thewanderingcoder.com/2015/03/automating-boilerplate-in-org-mode-journall
         ("e" (find-file "~/.emacs.d/sean.org") ".emacs.d")
         ("c" (find-file "~/.emacs.d/Cask") "Cask")
 
+        ("i" (find-file "~/code/inventory/") "invent")
+
         ("a" (find-file "~/code/autrui/") "autrui")
         ("h" (find-file "~/Dropbox/gesta/2015.org") "hodie")
         ("r" (find-file "~/Dropbox/gesta/readings.org") "readings")
