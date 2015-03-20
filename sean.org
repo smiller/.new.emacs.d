@@ -625,3 +625,12 @@ http://thewanderingcoder.com/2015/03/automating-boilerplate-in-org-mode-journall
     (setq guide-key/guide-key-sequence t)
     (guide-key-mode 1)
 #+end_src
+
+** C-x 8 s to insert ZERO WIDTH SPACE
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+(defun my/insert-zero-width-space ()
+  (interactive)
+  (insert-char ?\u200B))
+(global-set-key (kbd "C-x 8 s") 'my/insert-zero-width-space)
+#+end_src
