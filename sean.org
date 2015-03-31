@@ -53,9 +53,13 @@
     (add-hook 'text-mode-hook 'my-text-mode-hook)
 
     (defun my-code-mode-hook ()
-      (whitespace-mode)
       (linum-mode)
       (typopunct-mode -1))
+
+    (add-hook 'ruby-mode-hook 'my-code-mode-hook)
+    (add-hook 'ruby-mode-hook
+      (lambda () (rvm-activate-corresponding-ruby)))
+    (add-hook 'ruby-mode-hook 'rubocop-mode)
 
     (add-hook 'enh-ruby-mode-hook 'my-code-mode-hook)
     (add-hook 'enh-ruby-mode-hook
