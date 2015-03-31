@@ -638,3 +638,9 @@ http://thewanderingcoder.com/2015/03/automating-boilerplate-in-org-mode-journall
   (insert-char ?\u200B))
 (global-set-key (kbd "C-x 8 s") 'my/insert-zero-width-space)
 #+end_src
+
+** helm-ag key binding
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+  (global-set-key (kbd "C-c s") 'helm-ag-project-root)
+#+end_src

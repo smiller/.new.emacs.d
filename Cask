@@ -40,6 +40,8 @@
 (depends-on "rubocop")
 (depends-on "flycheck")
 
+(depends-on "helm-ag")
+
 (development
  (depends-on "f")
  (depends-on "ecukes")
