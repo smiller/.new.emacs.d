@@ -42,6 +42,8 @@
 
 (depends-on "helm-ag")
 
+(depends-on "paredit")
+
 (development
  (depends-on "f")
  (depends-on "ecukes")

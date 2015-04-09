@@ -7,6 +7,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:background nil))))
  '(bmkp-gnus ((t (:foreground "green"))))
  '(bmkp-heading ((t (:foreground "green"))))
  '(bmkp-local-directory ((t (:background "black" :foreground "green"))))
@@ -19,4 +20,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
+ '(custom-safe-themes
+   (quote
+    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
  '(org-agenda-files (quote ("~/Dropbox/gesta/2015.org"))))
