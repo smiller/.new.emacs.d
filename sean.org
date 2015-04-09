@@ -625,7 +625,8 @@ Jump to directories
         ("e" (find-file "~/.emacs.d/sean.org") ".emacs.d")
         ("c" (find-file "~/.emacs.d/Cask") "Cask")
 
-        ("i" (find-file "~/code/inventory/") "invent")
+        ("oi" (find-file "~/code/inventory/") "invent")
+        ("oo" (find-file "~/code/optics/") "optics")
 
         ("a" (find-file "~/code/autrui/") "autrui")
         ("h" (find-file "~/Dropbox/gesta/2015.org") "hodie")
