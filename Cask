@@ -2,6 +2,9 @@
 (source melpa)
 (source marmalade) ;; typopunct not in melpa
 
+(depends-on "solarized-theme")
+(depends-on "zenburn-theme")
+
 (depends-on "rvm")
 
 (depends-on "ag")
@@ -9,7 +12,6 @@
 (depends-on "rspec-mode")
 (depends-on "typopunct")
 (depends-on "enh-ruby-mode")
-(depends-on "zenburn-theme")
 (depends-on "dired-details")
 (depends-on "yasnippet")
 (depends-on "ruby-tools")
