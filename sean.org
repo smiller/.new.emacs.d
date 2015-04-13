@@ -43,7 +43,6 @@
       (linum-mode -1)
       (auto-fill-mode 1)
       (set-input-method "TeX")
-      (paredit-mode)
       (define-key org-mode-map (kbd "M-s M-q") 'my/begin-end-quote)
       (define-key org-mode-map (kbd "M-s M-v") 'my/begin-end-verse)
       (define-key org-mode-map (kbd "M-s M-x") 'my/begin-end-example)
@@ -55,8 +54,7 @@
 
     (defun my-code-mode-hook ()
       (linum-mode)
-      (typopunct-mode -1)
-      (paredit-mode))
+      (typopunct-mode -1))
 
     (add-hook 'ruby-mode-hook 'my-code-mode-hook)
     (add-hook 'ruby-mode-hook
@@ -642,8 +640,11 @@ Switch modes.  (Because org-babel-tangle interacts with emacs-lisp mode)
       (kbd "C-c m")
       (defhydra hydra-mode-switch (:color blue)
         "mode-switch"
+        ("e" (emacs-lisp-mode) "emacs-lisp")
+        ("l" (linum-mode) "linum")
         ("o" (org-mode) "org")
-        ("e" (emacs-lisp-mode) "emacs-lisp")))
+        ("p" (paredit-mode) "paredit")
+        ("t" (typopunct-mode) "typopunct")))
 #+end_src
 
 ** guide-key, all the time
