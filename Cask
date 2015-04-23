@@ -46,6 +46,9 @@
 
 (depends-on "paredit")
 
+(depends-on "js2-mode")
+(depends-on "js2-refactor")
+
 (development
  (depends-on "f")
  (depends-on "ecukes")

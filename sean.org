@@ -70,7 +70,10 @@
     (add-hook 'feature-mode-hook
       (lambda () (rvm-activate-corresponding-ruby)))
 
+    (require 'js2-refactor)
     (add-hook 'js-mode-hook 'my-code-mode-hook)
+    (add-hook 'js-mode-hook
+      (lambda () (js2-mode)))
 
     (add-hook 'emacs-lisp-mode-hook 'my-code-mode-hook)
 
