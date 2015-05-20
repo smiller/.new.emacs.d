@@ -51,6 +51,8 @@
 
 (depends-on "neotree")
 
+(depends-on "coffee-mode")
+
 (development
  (depends-on "f")
  (depends-on "ecukes")

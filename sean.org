@@ -679,3 +679,10 @@ Switch modes.  (Because org-babel-tangle interacts with emacs-lisp mode)
 #+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
   (global-set-key [f8] 'neotree-toggle)
 #+end_src
+
+** javascript / coffeescript indent 2 spaces
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+  (custom-set-variables '(coffee-tab-width 2))
+  (setq-default js2-basic-offset 2)
+#+end_src
