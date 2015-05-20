@@ -633,7 +633,8 @@ Jump to directories
         ("h" (find-file "~/Dropbox/gesta/2015.org") "hodie")
         ("r" (find-file "~/Dropbox/gesta/readings.org") "readings")
         ("w" (find-file "~/Dropbox/gesta/writings.org") "writings")
-        ("t" (find-file "~/Dropbox/gesta/twc/") "twc")))
+        ("t" (find-file "~/Dropbox/gesta/twc/") "twc")
+        ("v" (find-file "~/Dropbox/gesta/verdour.org") "verdour")))
 #+end_src
 
 Switch modes.  (Because org-babel-tangle interacts with emacs-lisp mode)
@@ -671,4 +672,10 @@ Switch modes.  (Because org-babel-tangle interacts with emacs-lisp mode)
 
 #+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
   (global-set-key (kbd "C-c s") 'helm-ag-project-root)
+#+end_src
+
+** neotree-toggle key binding
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+  (global-set-key [f8] 'neotree-toggle)
 #+end_src

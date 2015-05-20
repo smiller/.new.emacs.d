@@ -49,6 +49,8 @@
 (depends-on "js2-mode")
 (depends-on "js2-refactor")
 
+(depends-on "neotree")
+
 (development
  (depends-on "f")
  (depends-on "ecukes")
