@@ -113,10 +113,14 @@
 	(interactive)
 	(find-file "db/structure.sql")))
 
+    ;; Because S-<up> is already mapped in org-mode
     (global-set-key (kbd "C-x RET <right>") 'windmove-right)
     (global-set-key (kbd "C-x RET <left>") 'windmove-left)
     (global-set-key (kbd "C-x RET <up>") 'windmove-up)
     (global-set-key (kbd "C-x RET <down>") 'windmove-down)
+
+    ;; Because M–i is tab-to-tab-stop in org-mode
+    (global-set-key (kbd "M-s i") 'imenu)
 #+END_SRC
 
 ** Emacs server and Emacsclient
@@ -649,6 +653,18 @@ Switch modes.  (Because org-babel-tangle interacts with emacs-lisp mode)
         ("o" (org-mode) "org")
         ("p" (paredit-mode) "paredit")
         ("t" (typopunct-mode) "typopunct")))
+#+end_src
+
+Ace jumps
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (global-set-key
+      (kbd "C-c e")
+      (defhydra hydra-ace-jump (:color blue)
+        "ace-jump"
+        ("c" (ace-jump-mode) "char")
+        ("l" (ace-jump-line-mode) "line")
+        ("w" (ace-jump-word-mode) "word")))
 #+end_src
 
 ** guide-key, all the time
