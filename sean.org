@@ -56,10 +56,8 @@
       (linum-mode)
       (typopunct-mode -1))
 
-    (add-hook 'ruby-mode-hook 'my-code-mode-hook)
-    (add-hook 'ruby-mode-hook
-      (lambda () (rvm-activate-corresponding-ruby)))
-    (add-hook 'ruby-mode-hook 'rubocop-mode)
+    (add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
+    (add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
 
     (add-hook 'enh-ruby-mode-hook 'my-code-mode-hook)
     (add-hook 'enh-ruby-mode-hook
