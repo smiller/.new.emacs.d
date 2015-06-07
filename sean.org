@@ -700,3 +700,9 @@ Ace jumps
   (custom-set-variables '(coffee-tab-width 2))
   (setq-default js2-basic-offset 2)
 #+end_src
+
+** github-flavored-markdown
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+  (setq markdown-command "~/.emacs.d/flavor.rb")
+#+end_src
