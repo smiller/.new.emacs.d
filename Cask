@@ -2,8 +2,7 @@
 (source melpa)
 (source marmalade) ;; typopunct not in melpa
 
-(depends-on "solarized-theme")
-(depends-on "zenburn-theme")
+(depends-on "color-theme-sanityinc-tomorrow")
 
 (depends-on "rvm")
 

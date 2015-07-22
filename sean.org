@@ -483,7 +483,7 @@ https://github.com/vmalloc/emacs/blob/master/custom/pbcopy.el
 
 #+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
     (defun theme-init ()
-      (load-theme 'solarized-light t)
+      (load-theme 'sanityinc-tomorrow-day t)
     )
 
     (add-hook 'after-init-hook 'theme-init)
@@ -637,6 +637,7 @@ Jump to directories
         ("w" (find-file "~/Dropbox/gesta/writings.org") "writings")
         ("t" (find-file "~/Dropbox/gesta/twc/") "twc")
         ("v" (find-file "~/Dropbox/gesta/verdour.org") "verdour")))
+
 #+end_src
 
 Switch modes.  (Because org-babel-tangle interacts with emacs-lisp mode)
@@ -650,7 +651,8 @@ Switch modes.  (Because org-babel-tangle interacts with emacs-lisp mode)
         ("l" (linum-mode) "linum")
         ("o" (org-mode) "org")
         ("p" (paredit-mode) "paredit")
-        ("t" (typopunct-mode) "typopunct")))
+        ("t" (typopunct-mode) "typopunct")
+        ("g" (my/margins) "margins")))
 #+end_src
 
 Ace jumps
@@ -705,4 +707,18 @@ Ace jumps
 
 #+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
   (setq markdown-command "~/.emacs.d/flavor.rb")
+#+end_src
+
+** margins
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+ (setq-default left-margin-width 4 right-margin-width 1)
+ (set-window-buffer nil (current-buffer))
+
+  (defun my/margins ()
+    "set default margins 4 / 1"
+    (interactive)
+    (setq-default left-margin-width 4 right-margin-width 1)
+    (set-window-buffer nil (current-buffer))
+  )
 #+end_src

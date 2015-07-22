@@ -20,13 +20,15 @@
  '(bmkp-local-directory ((t (:background "black" :foreground "green"))))
  '(bmkp-local-file-with-region ((t (:foreground "green"))))
  '(bmkp-local-file-without-region ((t (:foreground "green"))))
- '(helm-selection ((t (:background "green" :underline nil)))))
+ '(helm-selection ((t (:background "green" :underline nil))))
+ '(italic ((t (:foreground "color-30" :slant oblique)))))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
+ '(coffee-tab-width 2)
  '(custom-safe-themes
    (quote
     ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
