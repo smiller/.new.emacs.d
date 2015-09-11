@@ -40,6 +40,8 @@
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
     (typo-global-mode 1)
 
+    (global-set-key (kbd "C-c 8 c") 'typo-change-language)
+
     (defun my-text-mode-hook ()
       (typo-mode)
       (typo-change-language "English")
