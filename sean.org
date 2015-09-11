@@ -38,8 +38,11 @@
 ** Mode hooks
 
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (typo-global-mode 1)
+
     (defun my-text-mode-hook ()
-      (typopunct-mode)
+      (typo-mode)
+      (typo-change-language "English")
       (linum-mode -1)
       (auto-fill-mode 1)
       (nanowrimo-mode -1)
@@ -55,7 +58,7 @@
 
     (defun my-code-mode-hook ()
       (linum-mode)
-      (typopunct-mode -1))
+      (typo-mode -1))
 
     (add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
     (add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
@@ -248,45 +251,6 @@ Robe
     (package-initialize)
     (global-company-mode)
     (push 'company-robe company-backends)
-#+END_SRC
-
-** Typopunct mode
-
-including ellipsis from http://www.emacswiki.org/emacs/TypographicalPunctuationMarks
-
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
-    (require 'typopunct)
-
-    (typopunct-change-language 'english t)
-    ;; easy switch between French and English
-    (defun to-french()
-      (interactive)
-      (typopunct-change-language 'francais t))
-    (global-set-key (kbd "C-c C-g C-f") 'to-french)
-    (defun to-english()
-      (interactive)
-      (typopunct-change-language 'english t))
-    (global-set-key (kbd "C-c C-g C-e") 'to-english)
-
-    (defconst typopunct-ellipsis (decode-char 'ucs #x2026))
-	(defun typopunct-insert-ellipsis-or-middot (arg)
-	  "Change three consecutive dots to a typographical ellipsis mark."
-	  (interactive "p")
-	  (cond
-	   ((and (= 1 arg)
-		 (eq (char-before) ?^))
-	    (delete-char -1)
-	    (insert typopunct-middot))
-	   ((and (= 1 arg)
-		 (eq this-command last-command)
-		 (looking-back "\\.\\."))
-	    (replace-match "")
-	    (insert typopunct-ellipsis))
-	   (t
-	    (self-insert-command arg))))
-	(define-key typopunct-map "." 'typopunct-insert-ellipsis-or-middot)
-
-    (global-set-key (kbd "C-c y") 'typopunct-mode)
 #+END_SRC
 
 ** Org Mode
@@ -708,7 +672,7 @@ Switch modes.  (Because org-babel-tangle interacts with emacs-lisp mode)
         ("l" (linum-mode) "linum")
         ("o" (org-mode) "org")
         ("p" (paredit-mode) "paredit")
-        ("t" (typopunct-mode) "typopunct")
+        ("t" (typo-mode) "typo")
         ("g" (my/margins) "margins")))
 #+end_src
 
@@ -730,15 +694,6 @@ Ace jumps
     (require 'guide-key)
     (setq guide-key/guide-key-sequence t)
     (guide-key-mode 1)
-#+end_src
-
-** C-x 8 s to insert ZERO WIDTH SPACE
-
-#+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
-(defun my/insert-zero-width-space ()
-  (interactive)
-  (insert-char ?\u200B))
-(global-set-key (kbd "C-x 8 s") 'my/insert-zero-width-space)
 #+end_src
 
 ** helm-ag key binding

@@ -1,6 +1,5 @@
 (source gnu)
 (source melpa)
-(source marmalade) ;; typopunct not in melpa
 
 (depends-on "solarized-theme")
 
@@ -9,7 +8,7 @@
 (depends-on "ag")
 (depends-on "feature-mode")
 (depends-on "rspec-mode")
-(depends-on "typopunct")
+(depends-on "typo")
 (depends-on "enh-ruby-mode")
 (depends-on "dired-details")
 (depends-on "yasnippet")
