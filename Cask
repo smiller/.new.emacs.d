@@ -2,7 +2,7 @@
 (source melpa)
 (source marmalade) ;; typopunct not in melpa
 
-(depends-on "color-theme-sanityinc-tomorrow")
+(depends-on "solarized-theme")
 
 (depends-on "rvm")
 
@@ -51,6 +51,14 @@
 (depends-on "neotree")
 
 (depends-on "coffee-mode")
+
+(depends-on "magit")
+
+(depends-on "markdown-mode")
+
+(depends-on "cider")
+
+(depends-on "nanowrimo")
 
 (development
  (depends-on "f")

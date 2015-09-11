@@ -483,7 +483,7 @@ https://github.com/vmalloc/emacs/blob/master/custom/pbcopy.el
 
 #+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
     (defun theme-init ()
-      (load-theme 'sanityinc-tomorrow-day t)
+      (load-theme 'solarized-light t)
     )
 
     (add-hook 'after-init-hook 'theme-init)
