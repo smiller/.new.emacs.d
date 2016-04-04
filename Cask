@@ -59,6 +59,8 @@
 
 (depends-on "nanowrimo")
 
+(depends-on "org-bullets")
+
 (development
  (depends-on "f")
  (depends-on "ecukes")
