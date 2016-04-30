@@ -832,3 +832,12 @@ Ace jumps
 
       (require 'org-bullets)
 #+end_src
+
+** enable org-mode verbatim to handle quotes
+http://endlessparentheses.com/applying-markup-to-strings-in-org-mode.html
+http://emacs.stackexchange.com/questions/13820/inline-verbatim-and-code-with-quotes-in-org-mode/13828#13828
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (setcar (nthcdr 2 org-emphasis-regexp-components) " \t\r\n,\"")
+    (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+#+END_SRC
