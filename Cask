@@ -61,6 +61,8 @@
 
 (depends-on "org-bullets")
 
+(depends-on "cask-mode")
+
 (development
  (depends-on "f")
  (depends-on "ecukes")
