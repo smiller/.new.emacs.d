@@ -95,9 +95,6 @@
 
     (require 'projectile-rails)
     (add-hook 'projectile-mode-hook 'projectile-rails-on)
-
-    (require 'overseer)
-    (add-hook 'emacs-lisp-mode-hook 'overseer-mode-hook)
 #+END_SRC
 
 ** Global key bindings
