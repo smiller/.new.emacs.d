@@ -63,6 +63,8 @@
 
 (depends-on "cask-mode")
 
+(depends-on "ctags-update")
+
 (development
  (depends-on "f")
  (depends-on "ecukes")

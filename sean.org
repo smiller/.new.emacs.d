@@ -838,3 +838,11 @@ http://emacs.stackexchange.com/questions/13820/inline-verbatim-and-code-with-quo
     (setcar (nthcdr 2 org-emphasis-regexp-components) " \t\r\n,\"")
     (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
 #+END_SRC
+
+** ctags-update
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (autoload 'turn-on-ctags-auto-update-mode "ctags-update" "turn on `ctags-auto-update-mode'." t)
+    (add-hook 'my-code-mode-hook 'turn-on-ctags-auto-update-mode)
+    (setq tags-table-list '("~/code/inventory/TAGS"))
+#+end_src
