@@ -71,6 +71,7 @@
 
     (defun my-code-mode-hook ()
       (linum-mode)
+      (yafolding-mode)
       (setq line-spacing nil)
       (typo-mode -1))
 
@@ -845,4 +846,15 @@ http://emacs.stackexchange.com/questions/13820/inline-verbatim-and-code-with-quo
     (autoload 'turn-on-ctags-auto-update-mode "ctags-update" "turn on `ctags-auto-update-mode'." t)
     (add-hook 'my-code-mode-hook 'turn-on-ctags-auto-update-mode)
     (setq tags-table-list '("~/code/inventory/TAGS"))
+#+end_src
+
+** yafolding
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (global-set-key
+      (kbd "C-x y")
+      (defhydra hydra-yafolding (:color blue)
+        "yafolding"
+        ("e" (yafolding-toggle-element) "toggle-element")
+        ("a" (yafolding-toggle-all) "toggle-all")))
 #+end_src

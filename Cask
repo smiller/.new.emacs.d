@@ -65,6 +65,9 @@
 
 (depends-on "ctags-update")
 
+(depends-on "folding")
+(depends-on "yafolding")
+
 (development
  (depends-on "f")
  (depends-on "ecukes")
