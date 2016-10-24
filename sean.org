@@ -860,3 +860,13 @@ http://emacs.stackexchange.com/questions/13820/inline-verbatim-and-code-with-quo
         ("e" (yafolding-toggle-element) "toggle-element")
         ("a" (yafolding-toggle-all) "toggle-all")))
 #+end_src
+
+** Unicode
+http://pages.sachachua.com/.emacs.d/Sacha.html#org2acc9cc
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
+    (defmacro my/insert-unicode (unicode-name)
+      `(lambda () (interactive)
+         (insert-char (cdr (assoc-string ,unicode-name (ucs-names))))))
+    (global-set-key (kbd "C-x 8 s") (my/insert-unicode "ZERO WIDTH SPACE"))
+#+end_src
