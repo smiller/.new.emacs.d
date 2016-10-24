@@ -734,8 +734,10 @@ Jump to directories
 
         ("oi" (find-file "~/code/inventory/") "invent")
         ("oo" (find-file "~/code/optics/") "optics")
+        ("oj" (find-file "~/Dropbox/gesta/optoro.org") "optoro.org")
 
         ("a" (find-file "~/code/autrui/") "autrui")
+        ("b" (find-file "~/Dropbox/gesta/books.org") "books")
         ("h" (find-file "~/Dropbox/gesta/2016.org") "hodie")
         ("r" (find-file "~/Dropbox/gesta/readings.org") "readings")
         ("w" (find-file "~/Dropbox/gesta/writings.org") "writings")
