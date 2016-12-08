@@ -1,7 +1,7 @@
 (source gnu)
 (source melpa)
 
-(depends-on "solarized-theme")
+(depends-on "minimal-theme")
 
 (depends-on "rvm")
 
@@ -67,6 +67,8 @@
 
 (depends-on "folding")
 (depends-on "yafolding")
+
+(depends-on "elm-mode")
 
 (development
  (depends-on "f")

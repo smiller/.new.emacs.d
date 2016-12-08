@@ -12,6 +12,7 @@
     (setq inhibit-startup-message t)
     (fset 'yes-or-no-p 'y-or-n-p)
     (menu-bar-mode -1)
+    (set-face-attribute 'fringe nil :background "white" :foreground "white")
 
     ;; -- rows and columns -------------------------------------------------------
     (setq line-number-mode t)
@@ -587,7 +588,7 @@ https://github.com/vmalloc/emacs/blob/master/custom/pbcopy.el
 
 #+begin_src emacs-lisp :tangle ~/.emacs.d/tangled-settings.el
     (defun theme-init ()
-      (load-theme 'solarized-light t)
+      (load-theme 'minimal-light t)
     )
 
     (add-hook 'after-init-hook 'theme-init)
