@@ -739,11 +739,32 @@ Jump to directories
 
         ("a" (find-file "~/code/autrui/") "autrui")
         ("b" (find-file "~/Dropbox/gesta/books.org") "books")
-        ("h" (find-file "~/Dropbox/gesta/2016.org") "hodie")
+        ("h" (find-file "~/Dropbox/gesta/2017.org") "hodie")
         ("r" (find-file "~/Dropbox/gesta/readings.org") "readings")
         ("w" (find-file "~/Dropbox/gesta/writings.org") "writings")
         ("t" (find-file "~/Dropbox/gesta/twc/") "twc")
-        ("v" (find-file "~/Dropbox/gesta/verdour.org") "verdour")))
+        ("v" (find-file "~/Dropbox/gesta/verdour.org") "verdour")
+
+        ("pp0" (find-file "~/Dropbox/gesta/1990.org") "1990")
+        ("p0" (find-file "~/Dropbox/gesta/2000.org") "2000")
+        ("p1" (find-file "~/Dropbox/gesta/2001.org") "2001")
+        ("p2" (find-file "~/Dropbox/gesta/2002.org") "2002")
+        ("p3" (find-file "~/Dropbox/gesta/2003.org") "2003")
+        ("p4" (find-file "~/Dropbox/gesta/2004.org") "2004")
+        ("p5" (find-file "~/Dropbox/gesta/2005.org") "2005")
+        ("p6" (find-file "~/Dropbox/gesta/2006.org") "2006")
+        ("p7" (find-file "~/Dropbox/gesta/2007.org") "2007")
+        ("p8" (find-file "~/Dropbox/gesta/2008.org") "2008")
+        ("p9" (find-file "~/Dropbox/gesta/2009.org") "2009")
+        ("0" (find-file "~/Dropbox/gesta/2010.org") "2010")
+        ("1" (find-file "~/Dropbox/gesta/2011.org") "2011")
+        ("2" (find-file "~/Dropbox/gesta/2012.org") "2012")
+        ("3" (find-file "~/Dropbox/gesta/2013.org") "2013")
+        ("4" (find-file "~/Dropbox/gesta/2014.org") "2014")
+        ("5" (find-file "~/Dropbox/gesta/2015.org") "2015")
+        ("6" (find-file "~/Dropbox/gesta/2016.org") "2016")
+        ("7" (find-file "~/Dropbox/gesta/2017.org") "2017")))
+
 
 #+end_src
 
